@@ -2,7 +2,7 @@ function h = schemaball(r, lbls, ccolor, ncolor)
 
 % SCHEMABALL Plots correlation matrix as a schemaball
 %
-%   SCHEMABALL(R) R is a square numeric matrix with values in [0,1].
+%   SCHEMABALL(R) R is a square numeric matrix with values in [-1,1].
 %
 %                 NOTE: only the off-diagonal lower triangular section of R is
 %                       considered, i.e. tril(r,-1).
@@ -98,8 +98,8 @@ if nargin < 2 || isempty(lbls);     lbls   = cellstr(reshape(sprintf('%-4d',1:sz
 if nargin < 4 || isempty(ncolor);   ncolor = [0 0 1];                                             end
 
 % R
-if ~isnumeric(r) || any(abs(r(:)) > 1) || sz(1) ~= sz(2) || numel(sz) > 2 || sz(1) == 1
-    error('schemaball:validR','R should be a square numeric matrix with values in [0, 1].')
+if ~isnumeric(r) || any(abs(r(:)) > 1) || sz(1) ~= sz(2) || numel(sz) > 2 || sz(1) < 3
+    error('schemaball:validR','R should be a square numeric matrix with values in [-1, 1].')
 end
 
 % Lbls
