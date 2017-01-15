@@ -7,9 +7,9 @@ function h = schemaball(r, lbls, ccolor, ncolor)
 %                 NOTE: only the off-diagonal lower triangular section of R is
 %                       considered, i.e. tril(r,-1).
 %
-%   SCHEMABALL(..., LBLS, CCOLOR, NCOLOR) Plot schemaball with optional 
+%   SCHEMABALL(..., LBLS, CCOLOR, NCOLOR) Plot schemaball with optional
 %                                         arguments (accepts empty args).
-%                                               
+%
 %       - LBLS      Plot a schemaball with custom labels at each node.
 %                   LBLS is either a cellstring of length M, where
 %                   M = size(r,1), or a M by N char array, where each
@@ -26,7 +26,7 @@ function h = schemaball(r, lbls, ccolor, ncolor)
 %
 %   H = SCHEMABALL(...) Returns a structure with handles to the graphic objects
 %
-%       h.l     handles to the curves (line objects), one per color shade. 
+%       h.l     handles to the curves (line objects), one per color shade.
 %               If no curves fall into a color shade that handle will be NaN.
 %       h.s     handle  to the nodes (scattergroup object)
 %       h.t     handles to the node text labels (text objects)
@@ -78,7 +78,7 @@ function h = schemaball(r, lbls, ccolor, ncolor)
 
 % Number of color shades/buckets (large N simply creates many perceptually indifferent color shades)
 N      = 20;
-% Points in [0, 1] for bezier curves: leave space at the extremes to detach a bit the nodes. 
+% Points in [0, 1] for bezier curves: leave space at the extremes to detach a bit the nodes.
 % Smaller step will use more points to plot the curves.
 t      = (0.025: 0.05 :1)';
 % Nodes edge color
@@ -139,7 +139,7 @@ figure('renderer','zbuffer','visible','off')
 axes('NextPlot','add')
 
 % Index only low triangular matrix without main diag
-tf        = tril(true(sz),-1);
+tf = tril(true(sz),-1);
 
 % Index correlations into bucketed colormap to determine plotting order (darkest to brightest)
 N2        = 2*N;
@@ -158,7 +158,7 @@ theta = -.25*tau : step : .75*tau - step;
 x     = cos(theta);
 y     = sin(theta);
 
-% PLOT BEZIER CURVES 
+% PLOT BEZIER CURVES
 % Calculate Bx and By positions of quadratic Bezier curves with P1 at (0,0)
 % B(t) = (1-t)^2*P0 + t^2*P2 where t is a vector of points in [0, 1] and determines, i.e.
 % how many points are used for each curve, and P0-P2 is the node pair with (x,y) coordinates.
@@ -214,7 +214,8 @@ posfa(1,4) = (( diff(ylims)/2 - 1)*posfa(2,4) + 1) * posfa(1,4);
 posfa(1,2) = 100;
 
 % Axis settings
-set(gca, 'Xlim',xlims,'Ylim',ylims, 'color', 'k','XColor','none','YColor','none')
+set(gca, 'Xlim',xlims,'Ylim',ylims, 'color', 'k','XColor','none','YColor','none',...
+         'clim',[-1,1])
 set(gcf, 'pos' ,posfa(1,:),'Visible','on')
 axis equal
 
