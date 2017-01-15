@@ -214,9 +214,12 @@ posfa(1,4) = (( diff(ylims)/2 - 1)*posfa(2,4) + 1) * posfa(1,4);
 posfa(1,2) = 100;
 
 % Axis settings
-set(gca, 'Xlim',xlims,'Ylim',ylims, 'color', 'k', 'layer','bottom', 'Xtick',[],'Ytick',[])
+set(gca, 'Xlim',xlims,'Ylim',ylims, 'color', 'k','XColor','none','YColor','none')
 set(gcf, 'pos' ,posfa(1,:),'Visible','on')
 axis equal
+
+% Set colormap
+colormap(gca,ccolor);
 
 if nargout == 1
     h = s;
